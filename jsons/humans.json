@@ -1,0 +1,36 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "first_name": "Adriana",
+      "last_name": "Ulina",
+      "age": 25,
+      "gender": "female",
+      "face": "./img/adriana-face-1.jpg"
+    },
+    {
+      "id": 2,
+      "first_name": "Ivan",
+      "last_name": "Ulina",
+      "age": 28,
+      "gender": "male",
+      "face": "./img/ivan-face-1.png"
+    },
+    {
+      "id": 2,
+      "first_name": "Maria",
+      "last_name": "Muller",
+      "age": 21,
+      "gender": "female",
+      "face": "./img/maria-face-1.jpg"
+    },
+    {
+      "id": 2,
+      "first_name": "Michael",
+      "last_name": "Jons",
+      "age": 28,
+      "gender": "male",
+      "face": "./img/michael-face-1.jpg"
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.w-100 {
+  width: 100%;
+}
+
+.w-25 {
+  width: 25%;
+}
+
+.d-flex {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.flex-row {
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.px-2 {
+  padding-left: 0.8rem;
+  padding-left: 0.8rem;
+}
+
+.d-block {
+  display: block;
+}
+/*# sourceMappingURL=style.css.map */

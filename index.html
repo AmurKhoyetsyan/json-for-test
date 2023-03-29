@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport"
+              content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Jsons for test</title>
+        <link rel="stylesheet" type="text/css" href="./css/style.css" />
+    </head>
+    <body>
+        <meta content="json" />
+        <meta name="description" content="json for test" />
+        <meta name="description" content="jsons for test" />
+        <div class="humans-parent d-flex flex-row"></div>
+        <div class="countries-parent">
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Code</th>
+                    </tr>
+                </thead>
+                <tbody class="country-body"></tbody>
+            </table>
+        </div>
+        <script type="text/javascript">
+            ;(function(){
+                let humans = [];
+                const request = (url, method = 'GET', headers = [], data = null) => {
+                    let req = new XMLHttpRequest();
+
+                    req.open(method, url, true);
+
+                    for(let key in headers) {
+                        req.setRequestHeader(key, headers[key]);
+                    }
+
+                    return new Promise((resolve, reject) => {
+                        req.send(data);
+
+                        req.onload = event => {
+                            resolve(JSON.parse(event.currentTarget.responseText));
+                        };
+
+                        req.onerror = err => {
+                            reject(err);
+                        };
+                    });
+                };
+
+                function cretaeContent(data, parent) {
+                    let len = data.length;
+
+                    let parentDiv = document.querySelector(parent);
+                    for(let i = 0; i < len; i++) {
+                        let divTagItme = document.createElement('div');
+                        divTagItme.classList.add('w-25');
+                        divTagItme.classList.add('px-2');
+                        let img = document.createElement('img');
+                        img.classList.add('w-100');
+                        img.classList.add('d-block');
+                        img.src = data[i].face;
+
+                        let divTagName = document.createElement('div');
+                        let spanTagName = document.createElement('span');
+
+                        spanTagName.innerText = `${data[i].first_name} ${data[i].last_name} age: ${data[i].age} gender: ${data[i].gender}`;
+
+                        divTagName.appendChild(spanTagName);
+
+                        divTagItme.appendChild(img);
+                        divTagItme.appendChild(divTagName);
+
+                        parentDiv.appendChild(divTagItme);
+                    }
+                }
+
+                function createCountries(data, parent) {
+                    let len = data.length;
+
+                    let tbody = document.querySelector(parent);
+                    for(let i = 0; i < len; i++) {
+                        let tr = document.createElement('tr');
+
+                        let td1 = document.createElement('td');
+                        let span1 = document.createElement('span');
+                        span1.innerText = data[i].name;
+
+                        let td2 = document.createElement('td');
+                        let span2 = document.createElement('span');
+                        span2.innerText = data[i].code;
+
+                        td1.appendChild(span1);
+                        td2.appendChild(span2);
+
+                        tr.appendChild(td1);
+                        tr.appendChild(td2);
+
+                        tbody.appendChild(tr);
+                    }
+                }
+
+                request('./jsons/humans.json', 'GET', {
+                    'Content-Type': 'application/json',
+                }).then(response => {
+                    cretaeContent(response.data, '.humans-parent');
+                }).catch(err => {
+                    console.log(err)
+                });
+
+                request('./jsons/countries.json', 'GET', {
+                    'Content-Type': 'application/json',
+                }).then(response => {
+                    createCountries(response.data, '.country-body');
+                }).catch(err => {
+                    console.log(err)
+                });
+
+                
+            })();
+        </script>
+    </body>
+</html>
